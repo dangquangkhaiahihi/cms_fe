@@ -1,0 +1,7 @@
+<svg id="Custom_Menu" data-name="Custom/Menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <rect id="bound" width="24" height="24" fill="none"/>
+  <rect id="Rectangle-20" width="16" height="2" rx="1" transform="translate(4 5)" fill="#21262c" opacity="0.3"/>
+  <rect id="Rectangle-20-Copy-3" width="16" height="2" rx="1" transform="translate(4 17)" fill="#21262c" opacity="0.3"/>
+  <path id="Combined-Shape" d="M5,9h8a1,1,0,0,1,0,2H5A1,1,0,0,1,5,9Zm0,4h8a1,1,0,0,1,0,2H5a1,1,0,0,1,0-2Z" fill="#0071a9" fill-rule="evenodd"/>
+  <path id="Path-10" d="M9.389,11.547,12.549,8.79a.235.235,0,0,0,0-.353L9.389,5.662A.234.234,0,0,0,9,5.839V11.37a.234.234,0,0,0,.389.177Z" transform="translate(7 3.396)" fill="#21262c" fill-rule="evenodd"/>
+<style type="text/css" media="screen">path{vector-effect:non-scaling-stroke}</style></svg>

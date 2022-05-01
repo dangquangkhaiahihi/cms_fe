@@ -1,0 +1,79 @@
+// .wrapper {
+//   display: flex;
+//   height: 100%;
+//   .side_bar {
+//     min-width: 250px;
+//     border-right: 1px solid #6f7984;
+//     .logo {
+//       height: 65px;
+//       font-size: 18px;
+//       text-align: center;
+//       line-height: 65px;
+//     }
+//   }
+//   .page {
+//     width: calc(100% - 254px);
+//     background: #e5e7f0;
+//     height: 100%;
+//     .header {
+//       display: flex;
+//       white-space: nowrap;
+//       background: #6f7984;
+//       height: 65px;
+//       color: white;
+//       line-height: 65px;
+//       padding: 0px 20px 0px 30px;
+//       .content {
+//         width: 100%;
+//         font-size: 25px;
+//         font-weight: 600;
+//       }
+//       .account_name {
+//         padding-right: 10px;
+//       }
+//       .account_avatar {
+//         .dropdown {
+//           .dropdown_button {
+//             padding: 0;
+//             border: none;
+//             &::after {
+//               display: none;
+//             }
+//             .account_avatar_image {
+//               height: 35px;
+//               width: 35px;
+//               border-radius: 5px;
+//             }
+//           }
+//           .dropdown_menu {
+//             line-height: 30px;
+//             width: 170px;
+//             .dropdown_item {
+//               .icon {
+//                 margin-right: 20px;
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//     .top_bar {
+//       line-height: 40px;
+//       height: 40px;
+//       display: flex;
+//       background: white;
+//       padding: 0 30px;
+//       .top_bar_elm_dashboard {
+//         font-size: 16px;
+//         cursor: pointer;
+//       }
+//       .top_bar_elm {
+//         padding-left: 20px;
+//         cursor: pointer;
+//       }
+//     }
+//     .component {
+//       height: calc(100% - 105px);
+//     }
+//   }
+// }
