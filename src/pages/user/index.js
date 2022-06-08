@@ -75,7 +75,16 @@ const UserPage = () => {
         window["loadJsDefault"]();
         console.log("Call load JS Default by another page");
         getList(currentPage, numPerPage);
+        setAccount(JSON.parse(localStorage.getItem("account")));
     }, []);
+
+    const [account, setAccount] = useState('');
+    useEffect(() => {
+        if(account && account.area.length === 1){
+            router.push("/dashboard")
+        }
+    }, [account]); 
+
     useEffect(() => {
         window["reloadSelectPicker"]();
     }, [areaCodeOptions]);

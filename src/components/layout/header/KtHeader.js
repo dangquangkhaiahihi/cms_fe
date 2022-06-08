@@ -96,7 +96,9 @@ export default function KtHeader() {
                       </a>
                     </Link>
                   </li>
-                  <li className="menu-item menu-item-submenu menu-item-rel" aria-haspopup="true"
+                  {
+                    account && account.area.length > 1 && 
+                    <li className="menu-item menu-item-submenu menu-item-rel" aria-haspopup="true"
                       data-menu-toggle="hover">
                     <a href="javascript:;" className="menu-link menu-toggle">
                       <i className="menu-icon ri-folder-chart-line"></i>
@@ -116,7 +118,7 @@ export default function KtHeader() {
 
                         <li className="menu-item" aria-haspopup="true">
 
-                          <Link href='/report/service'>
+                          <Link href='/system/business_type'>
                             <a className="menu-link">
                               <span className="menu-text">Loại hình kinh doanh</span>
                             </a>
@@ -125,14 +127,18 @@ export default function KtHeader() {
                       </ul>
                     </div>
                   </li>
-                  <li className="menu-item menu-item-rel" aria-haspopup="true">
-                    <Link href='/user'>
-                      <a className="menu-link">
-                        <i className="menu-icon ri-home-3-line"></i>
-                        <span className="menu-text">Quản lý người dùng</span>
-                      </a>
-                    </Link>
-                  </li>
+                  }
+                  {
+                    account && account.area.length > 1 && 
+                    <li className="menu-item menu-item-rel" aria-haspopup="true">
+                      <Link href='/user'>
+                        <a className="menu-link">
+                          <i className="menu-icon ri-home-3-line"></i>
+                          <span className="menu-text">Quản lý người dùng</span>
+                        </a>
+                      </Link>
+                    </li>
+                  }
                   <li className="menu-item menu-item-rel" aria-haspopup="true">
                     <Link href='/business_premises'>
                       <a className="menu-link">

@@ -40,7 +40,15 @@ const AreaPage = () => {
     useEffect(() => {
         window["loadJsDefault"]();
         console.log("Call load JS Default by another page");
+        setAccount(JSON.parse(localStorage.getItem("account")));
     }, []);
+
+    const [account, setAccount] = useState('');
+    useEffect(() => {
+        if(account && account.area.length === 1){
+            router.push("/dashboard")
+        }
+    }, [account]); 
 
     // get list when currentPage, numPerPage change
     useEffect(() => {
