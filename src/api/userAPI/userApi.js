@@ -51,64 +51,65 @@ export function searchUser(page, size, searchForm) {
     return callApi(endPoint, options);
 }
 
-// export function lockUser(id) {
-//     const endPoint = `/user/lock/${id}`;
-//     const options = {
-//         method: 'PUT'
-//     };
-//     return callApi(endPoint, options).then(body => {
-//         return body;
-//     });
-// }
+export function getUserDetail(id) {
+    const endPoint = `/users/${id}`;
+    const options = {
+        method: 'GET'
+    };
+    return callApi(endPoint, options).then(body => {
+        return body;
+    });
+}
 
-// export function unlockUser(id) {
-//     const endPoint = `/user/unlock/${id}`;
-//     const options = {
-//         method: 'PUT'
-//     };
-//     return callApi(endPoint, options).then(body => {
-//         return body;
-//     });
-// }
 
-// export function resetPassword(id) {
-//     const endPoint = `/user/reset-pass/${id}`;
-//     const options = {
-//         method: 'PUT'
-//     };
-//     return callApi(endPoint, options).then(body => {
-//         return body;
-//     });
-// }
+export function editUser(request,id) {
+    const endPoint = `/users/${id}`;
+    const options = {
+        method: 'PUT',
+        data: JSON.stringify(request)
+    };
+    return callApi(endPoint, options).then(body => {
+        return body;
+    });
+}
 
-// export function createUser(request) {
-//     const endPoint = '/user';
-//     const options = {
-//         method: 'POST',
-//         data: JSON.stringify(request)
-//     };
-//     return callApi(endPoint, options).then(body => {
-//         return body;
-//     });
-// }
+export function addUser(request) {
+    const endPoint = `/users`;
+    const options = {
+        method: 'POST',
+        data: JSON.stringify(request)
+    };
+    return callApi(endPoint, options).then(body => {
+        return body;
+    });
+}
 
-// export function editUser(request) {
-//     const endPoint = '/user';
-//     const options = {
-//         method: 'PUT',
-//         data: JSON.stringify(request)
-//     };
-//     return callApi(endPoint, options).then(body => {
-//         return body;
-//     });
-// }
+export function getAllActiveAreas() {
+    const endPoint = `/users/getAllActiveAreas`;
+    const options = {
+        method: 'GET'
+    };
+    return callApi(endPoint, options).then(body => {
+        return body;
+    });
+}
 
-// export function getUserDetail(id) {
-//     const endPoint = `/user/${id}`;
-//     const options = {
-//         method: 'GET'
-//     };
-//     return callApi(endPoint, options).then(body => {
-//         return body;
-//     });
-// }
+export function lockOrUnlockUser(id){
+    const url = `/users/lockAndUnlock/${id}`;
+    const options = {
+        method: 'PUT'
+    }
+    return callApi(url, options);
+}
+
+export function resetPassword(id) {
+    const endPoint = `/users/reset_password/${id}`;
+    const options = {
+        method: 'PUT'
+    };
+    return callApi(endPoint, options).then(body => {
+        return body;
+    });
+}
+
+

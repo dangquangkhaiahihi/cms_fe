@@ -1,10 +1,8 @@
 import callApi from "../../util/callApi";
-import { getUrlFromQuery } from "../../util/urlUtil";
-import { callApiNotAuth } from "../../util/callApiNotAuth";
 
 export function searchArea(page, size, searchForm){
     let url = `/area?page=${page}&size=${size}`;
-    if(searchForm.searchCode) url += `&code=${searchForm.searchCode}`;
+    if(searchForm.keyword) url += `&keyword=${searchForm.keyword}`;
     if(searchForm.status) url += `&status=${searchForm.status}`;
     console.log("serviceForm: ", searchForm);
 

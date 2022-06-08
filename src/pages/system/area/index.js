@@ -17,10 +17,10 @@ const AreaPage = () => {
     const [pageCount, setPageCount] = useState(0);
 
     const [requestSearch, setRequestSearch] = useState({
-        searchCode: "",
+        keyword: "",
         status: ""
     })
-    const { searchCode, status } = requestSearch;
+    const { keyword, status } = requestSearch;
 
     const [isShowLock, setIsShowLock] = useState(false);
     const [isShowUnlock, setIsShowUnlock] = useState(false);
@@ -40,7 +40,6 @@ const AreaPage = () => {
     useEffect(() => {
         window["loadJsDefault"]();
         console.log("Call load JS Default by another page");
-        getList(currentPage, numPerPage);
     }, []);
 
     // get list when currentPage, numPerPage change
@@ -125,7 +124,6 @@ const AreaPage = () => {
 
     const onChange = (e) => {
         e.preventDefault();
-        console.log(e.target.name);console.log(e.target.value);
         setRequestSearch({ ...requestSearch, [e.target.name]: e.target.value });
     };
 
@@ -169,7 +167,7 @@ const AreaPage = () => {
                                     <div className="col-md-3">
                                         <div className="form-group">
                                             <input type="text" className="form-control input-search" onChange={(e) => onChange(e)}
-                                                value={searchCode} name="searchCode" placeholder="Tìm kiếm"  />
+                                                value={keyword} name="keyword" placeholder="Tìm kiếm"  />
                                         </div>
                                     </div>
                                     <div className="col-md-3">
@@ -192,17 +190,6 @@ const AreaPage = () => {
                                             </button>
                                         </div>
                                     </div>
-
-                                    <div className="col-md">
-                                        <div className="row row-16 justify-content-md-end align-items-center flex-grow-1">
-                                            <div className="col-auto">
-                                                <button className="btn btn-primary"
-                                                onClick={() => {router.push("/system/area/add")}}>
-                                                    Thêm mới
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             {/* End form search */}
@@ -211,6 +198,16 @@ const AreaPage = () => {
                                 <div className="card-section">
                                     <div className="table-wrap table-responsive-new">
                                         <div className="table-top">
+                                            <div className="row align-items-center list-mb16 list-crop">
+                                                <div className="row row-16 justify-content-md-end align-items-center flex-grow-1">
+                                                    <div className="col-auto">
+                                                        <button className="btn btn-primary"
+                                                        onClick={() => {router.push("/system/area/add")}}>
+                                                            Thêm mới
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div className="row align-items-center list-mb16 list-crop">
                                                 <div className="col">
                                                     Tổng số bản ghi:

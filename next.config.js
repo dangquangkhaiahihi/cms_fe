@@ -25,7 +25,7 @@ module.exports = {
   basePath: "/cms",
   assetPrefix: "/cms",
   productionBrowserSourceMaps: true,
-  reactStrictMode: true,
+  reactStrictMode: false,
   compress: false, //  gzip compression to compress rendered content and static files
   onDemandEntries: {
     // period (in ms) where the server will keep pages in the buffer

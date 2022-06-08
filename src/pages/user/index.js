@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import LayoutPortal from "../../components/layout/LayoutPortal";
-import { searchUser } from "../../api/userAPI/userApi";
+import { searchUser, getAllActiveAreas, lockOrUnlockUser, resetPassword } from "../../api/userAPI/userApi";
 import SelectForm from "../../components/elements/selectForm/SelectForm"
 import Pagination from "../../components/templates/pagination";
 import { useRouter } from 'next/router'
@@ -22,11 +22,13 @@ const UserPage = () => {
         area:"",
         role:""
     })
+    console.log("helu anh Khang",requestSearch);
     const { keyword, status, area, role } = requestSearch;
 
     const [isShowLock, setIsShowLock] = useState(false);
     const [isShowUnlock, setIsShowUnlock] = useState(false);
-    const [areaId, setAreaId] = useState("");
+    const [isShowReset, setIsShowReset] = useState(false);
+    const [userId, setUserId] = useState("");
 
     const [statusOptions, setStatusOptions] = useState([
         {
@@ -50,12 +52,33 @@ const UserPage = () => {
         },  
     ])
 
+    const [areaCodeOptions, setAreaCodeOptions] = useState([]);
+
+    const getAreas = async () => {
+        const dummyAreaOptions = [];
+        await getAllActiveAreas().then(body => {
+            if(body.data){
+                body.data.forEach(item => {
+                    const areaOption = {
+                        text : item.name,
+                        value : item.code
+                    }
+                    dummyAreaOptions.push(areaOption);
+                });
+            }
+        })
+        setAreaCodeOptions(dummyAreaOptions);
+    }
+
 
     useEffect(() => {
         window["loadJsDefault"]();
         console.log("Call load JS Default by another page");
         getList(currentPage, numPerPage);
     }, []);
+    useEffect(() => {
+        window["reloadSelectPicker"]();
+    }, [areaCodeOptions]);
 
     // get list when currentPage, numPerPage change
     useEffect(() => {
@@ -70,7 +93,7 @@ const UserPage = () => {
     // Get list to table
     const getList = async (page, itemPerPage) => {
         const { data } = await searchUser(page, itemPerPage, requestSearch);
-
+        getAreas();
         console.log("data: ", data);
         if (data) {
             setTotal(data.totalElements);
@@ -94,8 +117,8 @@ const UserPage = () => {
     //* START LOCK*
     // Click lock
     const handleProceedLock = async (id) => {
-        // call api lock/unlock area
-        // const { data } = await lockOrUnlockArea(id);
+        // call api lock/unlock user
+        await lockOrUnlockUser(id);
         getList(currentPage, numPerPage);
         setIsShowLock(true);
     }
@@ -103,7 +126,7 @@ const UserPage = () => {
     // Confirm lock
     const handleConfirmLock = async (confirm) => {
         if (confirm)
-            await handleProceedLock(areaId);
+            await handleProceedLock(userId);
         handleCloseLock()
         console.log(isShowLock);
     }
@@ -119,7 +142,7 @@ const UserPage = () => {
     // Click lock
     const handleProceedUnlock = async (id) => {
         // call api lock/unlock area
-        // const { data } = await lockOrUnlockArea(id);
+        await lockOrUnlockUser(id);
         getList(currentPage, numPerPage);
         setIsShowUnlock(true);
     }
@@ -127,7 +150,7 @@ const UserPage = () => {
     // Confirm lock
     const handleConfirmUnlock = async (confirm) => {
         if (confirm)
-            await handleProceedUnlock(areaId);
+            await handleProceedUnlock(userId);
         handleCloseUnlock()
     }
 
@@ -174,7 +197,7 @@ const UserPage = () => {
                         <div className="card card-border card-custom gutter-b example example-compact">
                             {/* form search */}
                             <div className="card-header">
-                                <div className="row align-items-center flex-grow-1 list-mb16 list-crop">
+                                <div className="row align-items-center flex-grow-1 list-mb16 list-crop my-4">
                                     <div className="col-md-3">
                                         <div className="form-group">
                                             <input type="text" className="form-control input-search" onChange={(e) => onChange(e)}
@@ -186,10 +209,10 @@ const UserPage = () => {
                                             <SelectForm
                                                 styleClass="form-control selectpicker mb-3"
                                                 title="Trạng thái hoạt động"
-                                                defaultValue={2}
+                                                value={requestSearch.status}
                                                 defaultTitle="--Tất cả--"
                                                 data={statusOptions}
-                                                handleChange={onChange}
+                                                handleChange={(e) => onChange(e)}
                                                 name="status"
                                             />
                                         </div>
@@ -199,10 +222,10 @@ const UserPage = () => {
                                             <SelectForm
                                                 styleClass="form-control selectpicker mb-3"
                                                 title="Quyền"
-                                                defaultValue={""}
+                                                value={requestSearch.role}
                                                 defaultTitle="--Tất cả--"
                                                 data={roleOptions}
-                                                handleChange={onChange}
+                                                handleChange={(e) => onChange(e)}
                                                 name="role"
                                             />
                                         </div>
@@ -212,21 +235,21 @@ const UserPage = () => {
                                             <SelectForm
                                                 styleClass="form-control selectpicker mb-3"
                                                 title="Khu vực"
-                                                defaultValue={""}
+                                                value={area}
                                                 defaultTitle="--Tất cả--"
-                                                data={statusOptions}
-                                                handleChange={onChange}
+                                                data={areaCodeOptions}
+                                                handleChange={(e) => onChange(e)}
                                                 name="area"
                                             />
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="row justify-content-center my-4">
-                                <div className="col-auto">
-                                    <button className="btn btn-primary w-20" onClick={(e) => onSubmit(e)}>
-                                        Tìm kiếm
-                                    </button>
+                                <div className="row align-items-center list-mb16 list-crop mx-2 my-4">
+                                    <div className="col-auto">
+                                        <button className="btn btn-primary w-20" onClick={(e) => onSubmit(e)}>
+                                            Tìm kiếm
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             {/* End form search */}
@@ -236,19 +259,19 @@ const UserPage = () => {
                                     <div className="table-wrap table-responsive-new">
                                         <div className="table-top">
                                             <div className="row align-items-center list-mb16 list-crop">
-                                                <div className="col">
-                                                    Tổng số bản ghi:
-                                                    <span className="font-weight-500 text-primary">{total}</span>
-                                                </div>
-                                            </div>
-                                            <div className="row align-items-center list-mb16 list-crop">
                                                 <div className="row row-16 justify-content-md-end align-items-center flex-grow-1">
                                                     <div className="col-auto">
                                                         <button className="btn btn-primary"
-                                                        onClick={() => {router.push("/system/user/add")}}>
+                                                        onClick={() => {router.push("/user/add")}}>
                                                             Thêm mới
                                                         </button>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div className="row align-items-center list-mb16 list-crop">
+                                                <div className="col">
+                                                    Tổng số bản ghi:
+                                                    <span className="font-weight-500 text-primary">{total}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -320,24 +343,12 @@ const UserPage = () => {
                                                                     }
                                                                     </td>
                                                                     <td>{item.role}</td>
-                                                                    {/* <td>
-                                                                        {
-                                                                            item.status == 0 && (
-                                                                                <label className="label label-size-default label-light-danger label-inline">Khóa</label>
-                                                                            )
-                                                                        }
-                                                                        {
-                                                                            item.status == 1 && (
-                                                                                <label className="label label-size-default label-light-success label-inline">Hoạt động</label>
-                                                                            )
-                                                                        }
-                                                                    </td> */}
                                                                     <td className="sticky-ult">
                                                                             <div className="text-center">
-                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/system/area/detail/${item.id}`)}} data-tooltip="tooltip" title="Xem">
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/user/detail/${item.id}`)}} data-tooltip="tooltip" title="Xem">
                                                                                     <Image src="/media/icons-color/subdefault/default/info.svg" alt="" styleClass={"btn-icon"} />
                                                                                 </button>
-                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/system/area/edit/${item.id}`)}} data-tooltip="tooltip" title="Chỉnh sửa">
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/user/edit/${item.id}`)}} data-tooltip="tooltip" title="Chỉnh sửa">
                                                                                     <Image src="/media/icons-color/subdefault/default/24x24-edit.svg" alt="" styleClass={"btn-icon"} />
                                                                                 </button>
                                                                                 {
@@ -345,7 +356,7 @@ const UserPage = () => {
                                                                                     <button className="btn btn-transaprent btn-icon btn-sm" 
                                                                                         onClick={() => {
                                                                                             setIsShowUnlock(true);
-                                                                                            setAreaId(item.id);
+                                                                                            setUserId(item.id);
                                                                                         }} 
                                                                                         data-tooltip="tooltip" title="Mở khóa">
                                                                                         <Image src="/media/icons-color/info/default/24x24-unlock.svg" alt="" styleClass={"btn-icon"} />
@@ -356,12 +367,15 @@ const UserPage = () => {
                                                                                     <button className="btn btn-transaprent btn-icon btn-sm" 
                                                                                         onClick={() => {
                                                                                             setIsShowLock(true);
-                                                                                            setAreaId(item.id);
+                                                                                            setUserId(item.id);
                                                                                         }} 
                                                                                         data-tooltip="tooltip" title="Khóa">
                                                                                         <Image src="/media/icons-color/subdefault/default/24x24-lock.svg" alt="" styleClass={"btn-icon"} />
                                                                                     </button>
                                                                                 }
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {}} data-tooltip="tooltip" title="Reset mật khẩu">
+                                                                                    <Image src="/media/icons-color/default/default/key.svg" alt="" styleClass={"btn-icon"} />
+                                                                                </button>
                                                                             </div>
                                                                         </td>
                                                                 </tr>
@@ -385,14 +399,18 @@ const UserPage = () => {
                     </div>
                 </div>
             </div>
-            {/* Modal for show area's LOCK*/}
+            {/* Modal for show user's LOCK*/}
             <ModalConfirm isShow={isShowLock} title={"XÁC NHẬN"} handleClose={handleConfirmLock}>
-                <h5>BẠN CÓ CHẮC MUỐN KHÓA KHU VỰC KHÔNG</h5>
+                <h5>BẠN CÓ CHẮC MUỐN KHÓA NGƯỜI DÙNG KHÔNG</h5>
             </ModalConfirm>
-            {/* Modal for show area's UNLOCK */}
+            {/* Modal for show user's UNLOCK */}
             <ModalConfirm isShow={isShowUnlock} title={"XÁC NHẬN"} handleClose={handleConfirmUnlock}>
-                <h5>BẠN CÓ CHẮC MUỐN MỞ KHÓA KHU VỰC KHÔNG</h5>
+                <h5>BẠN CÓ CHẮC MUỐN MỞ KHÓA NGƯỜI DÙNG KHÔNG</h5>
             </ModalConfirm>
+            {/* Modal for show user's RESET PASS */}
+            {/* <ModalConfirm isShow={isShowReset} title={"XÁC NHẬN"} handleClose={handleConfirmReset}>
+                <h5>BẠN CÓ CHẮC MUỐN CÀI LẠI MẬT KHẨU NGƯỜI DÙNG KHÔNG</h5>
+            </ModalConfirm> */}
         </div>
 );
 };

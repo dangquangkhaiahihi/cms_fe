@@ -117,7 +117,7 @@ export default function KtHeader() {
                         <li className="menu-item" aria-haspopup="true">
 
                           <Link href='/report/service'>
-                            <a href="pages/bao-cao-thong-ke/2-bao-cao-phi-dich-vu.html" className="menu-link">
+                            <a className="menu-link">
                               <span className="menu-text">Loại hình kinh doanh</span>
                             </a>
                           </Link>
@@ -134,7 +134,7 @@ export default function KtHeader() {
                     </Link>
                   </li>
                   <li className="menu-item menu-item-rel" aria-haspopup="true">
-                    <Link href='/dashboard'>
+                    <Link href='/business_premises'>
                       <a className="menu-link">
                         <i className="menu-icon ri-home-3-line"></i>
                         <span className="menu-text">Cơ sở kinh doanh</span>

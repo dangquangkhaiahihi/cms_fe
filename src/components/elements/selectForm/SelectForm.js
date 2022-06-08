@@ -20,7 +20,7 @@ const SelectForm = ({
         title={title}
         // defaultValue=""
         onChange={handleChange}
-        value=""
+        value={value}
         name={name}
       >
         <option value={defaultValue}>{defaultTitle}</option>
