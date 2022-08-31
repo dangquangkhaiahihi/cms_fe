@@ -73,8 +73,6 @@ const BusinessPremisesPage = () => {
         },  
     ])
 
-    console.log(licenseStatusOptions);
-
     const [warningStatusOptions, setWarningStatusOptions] = useState([
         {
             value : 0,
@@ -181,8 +179,29 @@ const BusinessPremisesPage = () => {
         getList(currentPage, numPerPage);
     }
 
-  return (
+    const [isCheckAll, setIsCheckAll] = useState(false);
+    const [isCheck, setIsCheck] = useState([]);
 
+    console.log(isCheck);
+    console.log(isCheck.includes('12'));
+
+    const handleSelectAll = e => {
+        setIsCheckAll(!isCheckAll);
+        setIsCheck(list.map(li => li.id));
+        if (isCheckAll) {
+          setIsCheck([]);
+        }
+    };
+         
+    const handleClick = (e) => {
+        const { id, checked } = e.target;
+        setIsCheck([...isCheck, parseInt(id)]);
+        if (!checked) {
+            setIsCheck(isCheck.filter(item => item != id));
+        }
+    };
+
+    return (
         <div className="d-flex flex-column-fluid">
             <div className="container">
                 <div className="page-title">
@@ -342,6 +361,15 @@ const BusinessPremisesPage = () => {
                                                         <th>
                                                             STT
                                                         </th>
+                                                        <th>
+                                                            Chọn
+                                                            <input
+                                                                id={"selectAll"}
+                                                                type="checkbox"
+                                                                onChange={(e) => handleSelectAll(e)}
+                                                                checked={isCheckAll}
+                                                            />
+                                                        </th>
                                                         <th className="sort sort-no">
                                                             Tên cơ sở
                                                         </th>
@@ -386,6 +414,14 @@ const BusinessPremisesPage = () => {
                                                             return (
                                                                 <tr key={index}>
                                                                     <td>{currentPage * numPerPage + index + 1}</td>
+                                                                    <td>
+                                                                        <input
+                                                                            id={item.id}
+                                                                            type="checkbox"
+                                                                            onChange={(e) => handleClick(e)}
+                                                                            // checked={isCheck.includes(item.id)}
+                                                                        />
+                                                                    </td>
                                                                     <td>{item.name}</td>
                                                                     <td>{item.addressGeneral}</td>
                                                                     <td>{item.addressDetail}</td>

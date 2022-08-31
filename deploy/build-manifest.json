@@ -35,25 +35,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/business_premises.js"
     ],
-    "/business_premises/add_license/[id]": [
+    "/system/area": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/business_premises/add_license/[id].js"
+      "static/chunks/pages/system/area.js"
     ],
-    "/business_premises/add_person/[id]": [
+    "/system/business_type": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/business_premises/add_person/[id].js"
+      "static/chunks/pages/system/business_type.js"
     ],
-    "/dashboard": [
+    "/user": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/dashboard.js"
-    ],
-    "/login": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/login.js"
+      "static/chunks/pages/user.js"
     ]
   },
   "ampFirstPages": []

@@ -1,11 +1,15 @@
-const Checkbox = ({ label,name, handleChange}) => {
-  return (<label className="checkbox">
+import React from "react";
 
-      <input type="checkbox" name={name}  />
-
-          <span></span>{label}
-
-  </label>)
+const Checkbox = ({ id, name, handleClick, isChecked }) => {
+  return (
+    <input
+      id={id}
+      name={name}
+      type="checkbox"
+      onChange={handleClick}
+      checked={isChecked}
+    />
+  );
 };
 
 export default Checkbox;
