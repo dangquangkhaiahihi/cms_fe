@@ -23,7 +23,7 @@ export default function DetailUser() {
                 if(body.data){
                     setUserDetail(body.data);
                 }else{
-                    router.push("/user");
+                    moveToOtherPage("/user");
                 }
             });
         }
@@ -31,8 +31,14 @@ export default function DetailUser() {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/user");
+        moveToOtherPage("/user");
     }
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
 
     return (
         <>
@@ -70,31 +76,31 @@ export default function DetailUser() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Họ tên</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={userDetail.fullName} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={userDetail.fullName} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Ngày sinh</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={userDetail.dob} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={userDetail.dob} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Email</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={userDetail.email} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={userDetail.email} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Số điện thoại</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={userDetail.phoneNumber} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={userDetail.phoneNumber} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Số căn cước công dân</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={userDetail.socialSecurityNum} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={userDetail.socialSecurityNum} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
@@ -102,20 +108,20 @@ export default function DetailUser() {
                                     {
                                         (userDetail.areas).length === 1 &&
                                         <div className="input-group">
-                                            <input type="text" className="w-100 px-3 py-1" value={userDetail.areas} disabled />
+                                            <input type="text" className="w-100 px-3 py-1 form-control" value={userDetail.areas} readOnly />
                                         </div>
                                     }
                                     {
                                         (userDetail.areas).length > 1 &&
                                         <div className="input-group">
-                                            <input type="text" className="w-100 px-3 py-1" value={"Tất cả các khu vực"} disabled />
+                                            <input type="text" className="w-100 px-3 py-1 form-control" value={"Tất cả các khu vực"} readOnly />
                                         </div>
                                     }
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Quyền người dùng</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={userDetail.role} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={userDetail.role} readOnly />
                                     </div>
                                 </div>
                             </div>

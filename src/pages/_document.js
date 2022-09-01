@@ -78,6 +78,7 @@ class MyDocument extends Document {
           <script src={`${basePath}/js/vendors/highcharts/highcharts.bundles.js`} />
           <script src={`${basePath}/js/custom.js`} />
           <script src={`${basePath}/js/reloadSelectPicker.js`}></script>
+          <script src={`${basePath}/js/destroySelectPicker.js`}></script>
         </body>
       </Html>
     );

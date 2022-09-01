@@ -20,7 +20,7 @@ export default function DetailArea() {
                 if(body.data){
                     setAreaDetail(body.data);
                 }else{
-                    router.push("/system/area");
+                    moveToOtherPage("/system/area");
                 }
             });
         }
@@ -28,8 +28,14 @@ export default function DetailArea() {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/system/area");
+        moveToOtherPage("/system/area");
     }
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
 
     return (
         <>
@@ -67,13 +73,13 @@ export default function DetailArea() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Mã khu vực</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={areaDetail.code} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={areaDetail.code} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Tên khu vực</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={areaDetail.name} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={areaDetail.name} readOnly />
                                     </div>
                                 </div>
                             </div>

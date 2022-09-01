@@ -29,7 +29,7 @@ export default function EditBusinessType() {
                 if(body.data){
                     setEditRequest(body.data);
                 }else{
-                    router.push("/system/business_type");
+                    moveToOtherPage("/system/business_type");
                 }
             });
         }
@@ -37,14 +37,14 @@ export default function EditBusinessType() {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/system/business_type");
+        moveToOtherPage("/system/business_type");
     }
 
     //call api to resolve
     const handleProceedUpdate = async (request,id) => {
         const data = await editBusinessType(request,id);
         console.log(data);
-        if(data.desc === 'SVC-SUCCESS-00') router.push("/system/business_type");
+        if(data.desc === 'SVC-SUCCESS-00') moveToOtherPage("/system/business_type");
         else{
             setError(data.result.message);
             setIsShowError(true);
@@ -63,6 +63,12 @@ export default function EditBusinessType() {
         console.log(editRequest);
         setEditRequest({ ...editRequest, [e.target.name]: e.target.value });
     };
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
 
     return (
         <>
@@ -100,13 +106,13 @@ export default function EditBusinessType() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Mã khu vực</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={code} name="code" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={code} name="code" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Tên khu vực</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={name} name="name" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={name} name="name" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                             </div>

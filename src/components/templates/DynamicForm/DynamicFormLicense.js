@@ -117,19 +117,19 @@ export default function DynamicFormLicense(props) {
                     <div className="col-md-6 col-xl-6 mb-3">
                         <label className="text-sm-start float-start mb-1">Số đăng ký</label>
                         <div className="input-group">
-                            <input type="text" className="w-100 px-3 py-1" value={item.regno} name="regno" onChange={(e) => onChange(e,item.key)}/>
+                            <input type="text" className="w-100 px-3 py-1 form-control" value={item.regno} name="regno" onChange={(e) => onChange(e,item.key)}/>
                         </div>
                     </div>
                     <div className="col-md-6 col-xl-6 mb-3">
                         <label className="text-sm-start float-start mb-1">Ngày hiệu lực</label>
                         <div className="input-group">
-                            <input type="date" className="w-100 px-3 py-1" value={item.createdDate} name="createdDate" onChange={(e) => onChange(e,item.key)}/>
+                            <input type="date" className="w-100 px-3 py-1 form-control" value={item.createdDate} name="createdDate" onChange={(e) => onChange(e,item.key)}/>
                         </div>
                     </div>
                     <div className="col-md-6 col-xl-6 mb-3">
                         <label className="text-sm-start float-start mb-1">Ngày hết hạn</label>
                         <div className="input-group">
-                            <input type="date" className="w-100 px-3 py-1" value={item.expirationDate} name="expirationDate" onChange={(e) => onChange(e,item.key)}/>
+                            <input type="date" className="w-100 px-3 py-1 form-control" value={item.expirationDate} name="expirationDate" onChange={(e) => onChange(e,item.key)}/>
                         </div>
                     </div>
                     <div className="col-md-6 col-xl-6 mb-3">
@@ -139,7 +139,7 @@ export default function DynamicFormLicense(props) {
                         </div> */}
                         {
                           item.licenseTypeCode === "" &&
-                          <input type="text" className="w-100 px-3 py-1" disabled/>
+                          <input type="text" className="w-100 px-3 py-1 form-control" readOnly/>
                         }
                         {
                           item.licenseTypeCode === 'BUSINESS_LICENSE' &&
@@ -164,7 +164,8 @@ export default function DynamicFormLicense(props) {
                     <div className="col-md-6 col-xl-6 mb-3">
                         <label className="text-sm-start float-start mb-1">Ảnh</label>
                         <div className="input-group">
-                            <input type="text" className="w-100 px-3 py-1" name="image" readOnly/>
+                            {/* <input type="text" className="w-100 px-3 py-1 form-control" name="image" readOnly/> */}
+                            <input type='file' className='' onChange={()=>{}} required></input>
                         </div>
                     </div>
                   </div>

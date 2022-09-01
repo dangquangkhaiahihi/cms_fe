@@ -20,7 +20,7 @@ export default function DetailBusinessType() {
                 if(body.data){
                     setBusinessTypeDetail(body.data);
                 }else{
-                    router.push("/system/businessType");
+                    moveToOtherPage("/system/businessType");
                 }
             });
         }
@@ -28,8 +28,14 @@ export default function DetailBusinessType() {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/system/business_type");
+        moveToOtherPage("/system/business_type");
     }
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
 
     return (
         <>
@@ -67,13 +73,13 @@ export default function DetailBusinessType() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Mã loại hình</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={businessTypeDetail.code} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={businessTypeDetail.code} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Tên loại hình</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={businessTypeDetail.name} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={businessTypeDetail.name} readOnly />
                                     </div>
                                 </div>
                             </div>

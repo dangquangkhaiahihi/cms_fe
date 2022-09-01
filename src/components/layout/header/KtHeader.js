@@ -18,8 +18,13 @@ export default function KtHeader() {
     localStorage.removeItem("account");
     localStorage.removeItem("access_token");
     logout();
-    router.push("/dashboard");
+    moveToOtherPage("/dashboard");
   }
+
+  const moveToOtherPage = (path) => {
+    router.push(path);
+    window["destroySelectpicker"]();
+  };
 
   return (
 
@@ -58,7 +63,7 @@ export default function KtHeader() {
                     </a>
                   </li>
                   <li className="navi-item">
-                    <a className="navi-link" onClick={()=>{router.push("/changePassword")}}>
+                    <a className="navi-link" onClick={()=>{moveToOtherPage("/changePassword")}}>
                       <i className="navi-icon ri-lock-password-line"></i>
                       <span className="navi-link">Đổi mật khẩu</span>
                     </a>

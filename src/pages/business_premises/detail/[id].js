@@ -41,7 +41,7 @@ export default function DetailBusinessPremises() {
                     setPremissesDetail(body.data);
                     console.log(body.data);
                 }else{
-                    router.push("/business_premises");
+                    moveToOtherPage("/business_premises");
                 }
             });
         }
@@ -87,7 +87,7 @@ export default function DetailBusinessPremises() {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/business_premises");
+        moveToOtherPage("/business_premises");
     }
 
     const handleClose = () => {
@@ -97,6 +97,12 @@ export default function DetailBusinessPremises() {
         setIsShowLicense(false);
         setIsShowCertificate(false);
     }
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
 
     return (
         <>
@@ -137,31 +143,31 @@ export default function DetailBusinessPremises() {
                                         <div className="col-md-6 col-xl-6 mb-3">
                                             <label className="text-sm-start float-start mb-1">Tên cơ sở</label>
                                             <div className="input-group">
-                                                <input type="text" className="w-100 px-3 py-1" value={premissesDetail.name} disabled />
+                                                <input type="text" className="w-100 px-3 py-1 form-control" value={premissesDetail.name} readOnly />
                                             </div>
                                         </div>
                                         <div className="col-md-6 col-xl-6 mb-3">
                                             <label className="text-sm-start float-start mb-1">Địa chỉ</label>
                                             <div className="input-group">
-                                                <input type="text" className="w-100 px-3 py-1" value={premissesDetail.addressGeneral} disabled />
+                                                <input type="text" className="w-100 px-3 py-1 form-control" value={premissesDetail.addressGeneral} readOnly />
                                             </div>
                                         </div>
                                         <div className="col-md-6 col-xl-6 mb-3">
                                             <label className="text-sm-start float-start mb-1">Địa chỉ chi tiết</label>
                                             <div className="input-group">
-                                                <input type="text" className="w-100 px-3 py-1" value={premissesDetail.addressDetail} disabled />
+                                                <input type="text" className="w-100 px-3 py-1 form-control" value={premissesDetail.addressDetail} readOnly />
                                             </div>
                                         </div>
                                         <div className="col-md-6 col-xl-6 mb-3">
                                             <label className="text-sm-start float-start mb-1">Loại hình kinh doanh</label>
                                             <div className="input-group">
-                                                <input type="text" className="w-100 px-3 py-1" value={premissesDetail.businessType} disabled />
+                                                <input type="text" className="w-100 px-3 py-1 form-control" value={premissesDetail.businessType} readOnly />
                                             </div>
                                         </div>
                                         <div className="col-md-6 col-xl-6 mb-3">
                                             <label className="text-sm-start float-start mb-1">Khu vực</label>
                                             <div className="input-group">
-                                                <input type="text" className="w-100 px-3 py-1" value={premissesDetail.area} disabled />
+                                                <input type="text" className="w-100 px-3 py-1 form-control" value={premissesDetail.area} readOnly />
                                             </div>
                                         </div>
                                         <div className="col-md-6 col-xl-6 mb-3">
@@ -177,7 +183,7 @@ export default function DetailBusinessPremises() {
 
                             <div className="card">
                                 <div className="card-body p-4">
-                                    <h5 className="my-4"><b>Thông tin chủ/ quản lý</b></h5>
+                                    <h5 className="my-4"><b>Thông tin chủ - Thông tin quản lý</b></h5>
                                     <div className="row list-mb20 list-crop align-items-end mb-1">
                                         <div className="col-md-6 col-xl-6 mb-3">
                                             <div className="input-group">
@@ -199,7 +205,7 @@ export default function DetailBusinessPremises() {
 
                             <div className="card">
                                 <div className="card-body p-4">
-                                    <h5 className="my-4"><b>Thông tin ĐKKD/ chứng nhận ATTP</b></h5>
+                                    <h5 className="my-4"><b>Thông tin ĐKKD - Thông tin chứng nhận ATTP</b></h5>
                                     <div className="row list-mb20 list-crop align-items-end mb-1">
                                         <div className="col-md-6 col-xl-6 mb-3">
                                             <div className="input-group">
@@ -246,37 +252,37 @@ export default function DetailBusinessPremises() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Họ và tên đệm</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={owner.firstName} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={owner.firstName} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Tên</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={owner.lastName} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={owner.lastName} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Số điện thoại</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={owner.phoneNumber} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={owner.phoneNumber} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Email</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={owner.email} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={owner.email} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Ngày sinh</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={owner.dob} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={owner.dob} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Số căn cước</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={owner.socialSecurityNum} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={owner.socialSecurityNum} readOnly />
                                     </div>
                                 </div>
                             </div>
@@ -299,37 +305,37 @@ export default function DetailBusinessPremises() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Họ và tên đệm</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={manager.firstName} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={manager.firstName} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Tên</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={manager.lastName} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={manager.lastName} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Số điện thoại</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={manager.phoneNumber} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={manager.phoneNumber} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Email</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={manager.email} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={manager.email} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Ngày sinh</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={manager.dob} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={manager.dob} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Số căn cước</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={manager.socialSecurityNum} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={manager.socialSecurityNum} readOnly />
                                     </div>
                                 </div>
                             </div>
@@ -353,19 +359,19 @@ export default function DetailBusinessPremises() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Mã</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={license.regno} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={license.regno} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Ngày hiệu lưc</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={license.createdDate} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={license.createdDate} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Ngày kết thúc</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={license.expirationDate} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={license.expirationDate} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
@@ -373,13 +379,13 @@ export default function DetailBusinessPremises() {
                                     {
                                         license.provider === 'QUAN'&&
                                         <div className="input-group">
-                                            <input type="text" className="w-100 px-3 py-1" value="Quận" disabled />
+                                            <input type="text" className="w-100 px-3 py-1 form-control" value="Quận" readOnly />
                                         </div>
                                     }
                                     {
                                         license.provider === 'THANH_PHO'&&
                                         <div className="input-group">
-                                            <input type="text" className="w-100 px-3 py-1" value="Thành phố" disabled />
+                                            <input type="text" className="w-100 px-3 py-1 form-control" value="Thành phố" readOnly />
                                         </div>
                                     }
                                 </div>
@@ -403,33 +409,33 @@ export default function DetailBusinessPremises() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Mã</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={certificate.regno} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={certificate.regno} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Ngày hiệu lưc</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={certificate.createdDate} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={certificate.createdDate} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Ngày kết thúc</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={certificate.expirationDate} disabled />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={certificate.expirationDate} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
-                                    <label className="text-sm-start float-start mb-1">Nơi cấp</label>
+                                    <label className="text-sm-start float-start mb-1 form-control">Nơi cấp</label>
                                     {
                                         certificate.provider === 'QUAN'&&
                                         <div className="input-group">
-                                            <input type="text" className="w-100 px-3 py-1" value="Quận" disabled />
+                                            <input type="text" className="w-100 px-3 py-1 form-control" value="Quận" readOnly />
                                         </div>
                                     }
                                     {
                                         certificate.provider === 'THANH_PHO'&&
                                         <div className="input-group">
-                                            <input type="text" className="w-100 px-3 py-1" value="Thành phố" disabled />
+                                            <input type="text" className="w-100 px-3 py-1 form-control" value="Thành phố" readOnly />
                                         </div>
                                     }
                                 </div>

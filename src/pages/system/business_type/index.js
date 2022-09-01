@@ -46,7 +46,7 @@ const BusinessTypePage = () => {
     const [account, setAccount] = useState('');
     useEffect(() => {
         if(account && account.area.length === 1){
-            router.push("/dashboard")
+            moveToOtherPage("/dashboard")
         }
     }, [account]); 
 
@@ -140,6 +140,12 @@ const BusinessTypePage = () => {
         getList(currentPage, numPerPage);
     }
 
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
+
   return (
 
         <div className="d-flex flex-column-fluid">
@@ -210,7 +216,7 @@ const BusinessTypePage = () => {
                                                 <div className="row row-16 justify-content-md-end align-items-center flex-grow-1">
                                                     <div className="col-auto">
                                                         <button className="btn btn-primary"
-                                                        onClick={() => {router.push("/system/business_type/add")}}>
+                                                        onClick={() => {moveToOtherPage("/system/business_type/add")}}>
                                                             Thêm mới
                                                         </button>
                                                     </div>
@@ -266,10 +272,10 @@ const BusinessTypePage = () => {
                                                                     </td>
                                                                     <td className="sticky-ult">
                                                                             <div className="text-center">
-                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/system/business_type/detail/${item.id}`)}} data-tooltip="tooltip" title="Xem">
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {moveToOtherPage(`/system/business_type/detail/${item.id}`)}} data-tooltip="tooltip" title="Xem">
                                                                                     <Image src="/media/icons-color/subdefault/default/info.svg" alt="" styleClass={"btn-icon"} />
                                                                                 </button>
-                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/system/business_type/edit/${item.id}`)}} data-tooltip="tooltip" title="Chỉnh sửa">
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {moveToOtherPage(`/system/business_type/edit/${item.id}`)}} data-tooltip="tooltip" title="Chỉnh sửa">
                                                                                     <Image src="/media/icons-color/subdefault/default/24x24-edit.svg" alt="" styleClass={"btn-icon"} />
                                                                                 </button>
                                                                                 {

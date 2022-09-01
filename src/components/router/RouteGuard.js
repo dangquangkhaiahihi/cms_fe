@@ -46,5 +46,4 @@ function RouteGuard({ children }) {
     return (authorized && children);
 }
 
-
 export default RouteGuard;

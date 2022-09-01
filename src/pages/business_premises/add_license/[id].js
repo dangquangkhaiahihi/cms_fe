@@ -31,7 +31,7 @@ export default function AddLicense(props) {
             if(body.data){
                 setEditRequest(body.data);
             }else{
-                router.push("/business_premises");
+                moveToOtherPage("/business_premises");
             }
         });
         }
@@ -52,7 +52,7 @@ export default function AddLicense(props) {
     //call api to update license
     const handleProceedAddUpdateLicense = async (request) => {
         const data = await addOrUpdateLicenses(request,premisesId);
-        if(data.desc === 'SVC-SUCCESS-00') router.push("/business_premises");
+        if(data.desc === 'SVC-SUCCESS-00') moveToOtherPage("/business_premises");
         else{
             setError(data.result.message);
             setIsShowError(true);
@@ -61,8 +61,14 @@ export default function AddLicense(props) {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/business_premises");
+        moveToOtherPage("/business_premises");
     }
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
 
     return (
        <>

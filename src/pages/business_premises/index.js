@@ -179,27 +179,22 @@ const BusinessPremisesPage = () => {
         getList(currentPage, numPerPage);
     }
 
-    const [isCheckAll, setIsCheckAll] = useState(false);
     const [isCheck, setIsCheck] = useState([]);
-
-    console.log(isCheck);
-    console.log(isCheck.includes('12'));
-
-    const handleSelectAll = e => {
-        setIsCheckAll(!isCheckAll);
-        setIsCheck(list.map(li => li.id));
-        if (isCheckAll) {
-          setIsCheck([]);
-        }
-    };
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",isCheck);
          
     const handleClick = (e) => {
-        const { id, checked } = e.target;
-        setIsCheck([...isCheck, parseInt(id)]);
-        if (!checked) {
-            setIsCheck(isCheck.filter(item => item != id));
+        if(!e.target.checked){
+            setIsCheck(isCheck.filter(item => item != parseInt(e.target.id)));
+        }else{
+            setIsCheck([...isCheck, parseInt(e.target.id)]);
         }
     };
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
 
     return (
         <div className="d-flex flex-column-fluid">
@@ -341,7 +336,7 @@ const BusinessPremisesPage = () => {
                                                 <div className="row row-16 justify-content-md-end align-items-center flex-grow-1">
                                                     <div className="col-auto">
                                                         <button className="btn btn-primary"
-                                                        onClick={() => {router.push("/business_premises/add")}}>
+                                                        onClick={() => {moveToOtherPage("/business_premises/add")}}>
                                                             Thêm mới
                                                         </button>
                                                     </div>
@@ -366,8 +361,14 @@ const BusinessPremisesPage = () => {
                                                             <input
                                                                 id={"selectAll"}
                                                                 type="checkbox"
-                                                                onChange={(e) => handleSelectAll(e)}
-                                                                checked={isCheckAll}
+                                                                onChange={() => {
+                                                                    if(list.length > 0 && list.length == isCheck.length){
+                                                                        setIsCheck([]);
+                                                                    }else{
+                                                                        setIsCheck(list.map(item => item.id));
+                                                                    }
+                                                                }}
+                                                                checked={list.length > 0 && list.length == isCheck.length}
                                                             />
                                                         </th>
                                                         <th className="sort sort-no">
@@ -419,7 +420,7 @@ const BusinessPremisesPage = () => {
                                                                             id={item.id}
                                                                             type="checkbox"
                                                                             onChange={(e) => handleClick(e)}
-                                                                            // checked={isCheck.includes(item.id)}
+                                                                            checked={isCheck.includes((item.id))}
                                                                         />
                                                                     </td>
                                                                     <td>{item.name}</td>
@@ -481,19 +482,19 @@ const BusinessPremisesPage = () => {
                                                                     </td>
                                                                     <td className="sticky-ult">
                                                                             <div className="text-center">
-                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/business_premises/detail/${item.id}`)}} data-tooltip="tooltip" title="Xem">
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {moveToOtherPage(`/business_premises/detail/${item.id}`)}} data-tooltip="tooltip" title="Xem">
                                                                                     <Image src="media/icons-color/default/default/24x24-information-circle.svg" alt="" styleClass={"btn-icon"} />
                                                                                 </button>
-                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/business_premises/edit/${item.id}`)}} data-tooltip="tooltip" title="Chỉnh sửa">
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {moveToOtherPage(`/business_premises/edit/${item.id}`)}} data-tooltip="tooltip" title="Chỉnh sửa">
                                                                                     <Image src="/media/icons-color/default/default/24x24-edit.svg" alt="" styleClass={"btn-icon"} />
                                                                                 </button>
-                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/business_premises/add_license/${item.id}`)}} data-tooltip="tooltip" title="Thêm tài liệu">
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {moveToOtherPage(`/business_premises/add_license/${item.id}`)}} data-tooltip="tooltip" title="Thêm tài liệu">
                                                                                     <Image src="/media/icons-color/default/default/24x24-document.svg" alt="" styleClass={"btn-icon"} />
                                                                                 </button>
-                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/business_premises/add_person/${item.id}`)}} data-tooltip="tooltip" title="Thêm chủ/ quản lý">
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {moveToOtherPage(`/business_premises/add_person/${item.id}`)}} data-tooltip="tooltip" title="Thêm chủ/ quản lý">
                                                                                     <Image src="/media/icons-color/default/default/24x24-user.svg" alt="" styleClass={"btn-icon"} />
                                                                                 </button>
-                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/business_premises/inspect/${item.id}`)}} data-tooltip="tooltip" title="Thanh tra">
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {moveToOtherPage(`/business_premises/inspect/${item.id}`)}} data-tooltip="tooltip" title="Thanh tra">
                                                                                     <Image src="media/icons-color/default/default/info-2.svg" alt="" styleClass={"btn-icon"} />
                                                                                 </button>
                                                                             </div>

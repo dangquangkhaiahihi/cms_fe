@@ -63,7 +63,7 @@ export default function AddUser() {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/user");
+        moveToOtherPage("/user");
     }
 
     //call api to resolve
@@ -71,7 +71,7 @@ export default function AddUser() {
         const data = await addUser(request);
         console.log(data);
         if(data.desc === 'SVC-SUCCESS-00'){
-            router.push("/user");
+            moveToOtherPage("/user");
         } 
         else{
             setError(data.result.message);
@@ -88,6 +88,12 @@ export default function AddUser() {
         e.preventDefault();
         setEditRequest({ ...editRequest, [e.target.name]: e.target.value });
     };
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
 
     return (
         <>
@@ -125,43 +131,43 @@ export default function AddUser() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Họ và tên đệm</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={firstName} name="firstName" onChange={(e) => onChange(e)} />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={firstName} name="firstName" onChange={(e) => onChange(e)} />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Tên</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={lastName} name="lastName" onChange={(e) => onChange(e)} />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={lastName} name="lastName" onChange={(e) => onChange(e)} />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Ngày sinh</label>
                                     <div className="input-group">
-                                        <input type="date" className="w-100 px-3 py-1" value={dob} name="dob" onChange={(e) => onChange(e)}  />
+                                        <input type="date" className="w-100 px-3 py-1 form-control" value={dob} name="dob" onChange={(e) => onChange(e)}  />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Email</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={email} name="email" onChange={(e) => onChange(e)}  />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={email} name="email" onChange={(e) => onChange(e)}  />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Số điện thoại</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={phoneNumber} name="phoneNumber" onChange={(e) => onChange(e)}  />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={phoneNumber} name="phoneNumber" onChange={(e) => onChange(e)}  />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Số căn cước công dân</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={socialSecurityNum} name="socialSecurityNum" onChange={(e) => onChange(e)}  />
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={socialSecurityNum} name="socialSecurityNum" onChange={(e) => onChange(e)}  />
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Quyền</label>
                                     <div className="input-group">
-                                        <select className="w-100 px-3 py-1 selectpicker" title="-Chọn quyền người dùng-" value={role} name="role" onChange={(e) => onChange(e)} >
+                                        <select className="w-100 px-3 py-1 form-control selectpicker" title="-Chọn quyền người dùng-" value={role} name="role" onChange={(e) => onChange(e)} >
                                             {roleCodeOptions.map((item) => (
                                                 <option key={item.code} value={item.code}> {item.name} </option>
                                             ))}
@@ -173,7 +179,7 @@ export default function AddUser() {
                                     {
                                         (editRequest.role) === "USER" &&
                                         <div className="input-group">
-                                            <select className="w-100 px-3 py-1 selectpicker" title="-Chọn khu vực-" value={areaCode} name="areaCode" onChange={(e) => onChange(e)} >
+                                            <select className="w-100 px-3 py-1 form-control selectpicker" title="-Chọn khu vực-" value={areaCode} name="areaCode" onChange={(e) => onChange(e)} >
                                                 {areaCodeOptions.map((item) => (
                                                     <option key={item.code} value={item.code}> {item.name} </option>
                                                 ))}
@@ -183,13 +189,13 @@ export default function AddUser() {
                                     {
                                         (editRequest.role) === "ADMIN" &&
                                         <div className="input-group">
-                                            <input type="text" className="w-100 px-3 py-1" value={"Tất cả các khu vực"} disabled />
+                                            <input type="text" className="w-100 px-3 py-1 form-control" value={"Tất cả các khu vực"} readOnly />
                                         </div>
                                     }
                                     {
                                         (editRequest.role) === "" &&
                                         <div className="input-group">
-                                            <input type="text" className="w-100 px-3 py-1" value={"Vui lòng chọn Quyền người dùng trước"} disabled />
+                                            <input type="text" className="w-100 px-3 py-1 form-control" value={"Vui lòng chọn Quyền người dùng trước"} readOnly />
                                         </div>
                                     }
                                 </div>

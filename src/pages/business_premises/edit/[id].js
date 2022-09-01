@@ -52,7 +52,7 @@ export default function EditBusinessPremises() {
                 getAreas();
                 getBusinessTypes();
             }else{
-                router.push("/business_premises");
+                moveToOtherPage("/business_premises");
             }
         });
         }
@@ -132,7 +132,7 @@ export default function EditBusinessPremises() {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/business_premises");
+        moveToOtherPage("/business_premises");
     }
 
     //call api to edit
@@ -142,7 +142,7 @@ export default function EditBusinessPremises() {
         }
         const data = await editBusinessPremises(request,request.id);
         console.log(data);
-        if(data.desc === 'SVC-SUCCESS-00') router.push("/business_premises");
+        if(data.desc === 'SVC-SUCCESS-00') moveToOtherPage("/business_premises");
         else{
             setError(data.result.message);
             setIsShowError(true);
@@ -168,6 +168,12 @@ export default function EditBusinessPremises() {
             setEditRequestTemp({ ...editRequest, [e.target.name]: e.target.value });
         }
         // setEditRequest({ ...editRequest, [e.target.name]: e.target.value });
+    };
+
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
     };
 
     return (
@@ -205,19 +211,19 @@ export default function EditBusinessPremises() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Tên cơ sở</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={editRequestTemp.name} name="name" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={editRequestTemp.name} name="name" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Địa chỉ</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={editRequestTemp.addressGeneral} name="addressGeneral" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={editRequestTemp.addressGeneral} name="addressGeneral" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Địa chỉ chi tiết</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={editRequestTemp.addressDetail} name="addressDetail" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={editRequestTemp.addressDetail} name="addressDetail" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">

@@ -36,7 +36,7 @@ export default function InspectBusinessPremises() {
             if(body.data){
                 setEditRequest(body.data);
             }else{
-                router.push("/business_premises");
+                moveToOtherPage("/business_premises");
             }
         });
         }
@@ -58,7 +58,7 @@ export default function InspectBusinessPremises() {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/business_premises");
+        moveToOtherPage("/business_premises");
     }
 
     //call api to edit
@@ -69,7 +69,7 @@ export default function InspectBusinessPremises() {
         }
         const data = await inspectBusinessPremises(inspectRequest,premisesId);
         console.log(data);
-        if(data.desc === 'SVC-SUCCESS-00') router.push("/business_premises");
+        if(data.desc === 'SVC-SUCCESS-00') moveToOtherPage("/business_premises");
         else{
             setError(data.result.message);
             setIsShowError(true);
@@ -86,6 +86,12 @@ export default function InspectBusinessPremises() {
         setInspectRequest({ ...inspectRequest, [e.target.name]: e.target.value });
         console.log(e.target.name,e.target.value);
     };
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
 
     return (
         <>

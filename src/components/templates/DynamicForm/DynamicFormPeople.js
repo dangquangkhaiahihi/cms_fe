@@ -114,43 +114,43 @@ export default function DynamicFormPeople(props) {
                     <div className="col-md-6 col-xl-6 mb-3">
                         <label className="text-sm-start float-start mb-1">Họ và tên đệm</label>
                         <div className="input-group">
-                            <input type="text" className="w-100 px-3 py-1" value={item.firstName} name="firstName" onChange={(e) => onChange(e,item.key)}/>
+                            <input type="text" className="w-100 px-3 py-1 form-control" value={item.firstName} name="firstName" onChange={(e) => onChange(e,item.key)}/>
                         </div>
                     </div>
                     <div className="col-md-6 col-xl-6 mb-3">
                         <label className="text-sm-start float-start mb-1">Tên</label>
                         <div className="input-group">
-                            <input type="text" className="w-100 px-3 py-1" value={item.lastName} name="lastName" onChange={(e) => onChange(e,item.key)}/>
+                            <input type="text" className="w-100 px-3 py-1 form-control" value={item.lastName} name="lastName" onChange={(e) => onChange(e,item.key)}/>
                         </div>
                     </div>
                     <div className="col-md-6 col-xl-6 mb-3">
                         <label className="text-sm-start float-start mb-1">Email</label>
                         <div className="input-group">
-                            <input type="text" className="w-100 px-3 py-1" value={item.email} name="email" onChange={(e) => onChange(e,item.key)}/>
+                            <input type="text" className="w-100 px-3 py-1 form-control" value={item.email} name="email" onChange={(e) => onChange(e,item.key)}/>
                         </div>
                     </div>
                     <div className="col-md-6 col-xl-6 mb-3">
                         <label className="text-sm-start float-start mb-1">Ngày sinh</label>
                         <div className="input-group">
-                            <input type="date" className="w-100 px-3 py-1" value={item.dob} name="dob" onChange={(e) => onChange(e,item.key)}/>
+                            <input type="date" className="w-100 px-3 py-1 form-control" value={item.dob} name="dob" onChange={(e) => onChange(e,item.key)}/>
                         </div>
                     </div>
                     <div className="col-md-6 col-xl-6 mb-3">
                         <label className="text-sm-start float-start mb-1">Số điện thoại</label>
                         <div className="input-group">
-                            <input type="text" className="w-100 px-3 py-1" value={item.phoneNumber} name="phoneNumber" onChange={(e) => onChange(e,item.key)}/>
+                            <input type="text" className="w-100 px-3 py-1 form-control" value={item.phoneNumber} name="phoneNumber" onChange={(e) => onChange(e,item.key)}/>
                         </div>
                     </div>
                     <div className="col-md-6 col-xl-6 mb-3">
                         <label className="text-sm-start float-start mb-1">Số căn cước công dân</label>
                         <div className="input-group">
-                            <input type="text" className="w-100 px-3 py-1" value={item.socialSecurityNum} name="socialSecurityNum" onChange={(e) => onChange(e,item.key)}/>
+                            <input type="text" className="w-100 px-3 py-1 form-control" value={item.socialSecurityNum} name="socialSecurityNum" onChange={(e) => onChange(e,item.key)}/>
                         </div>
                     </div>
                     <div className="col-md-6 col-xl-6 mb-3">
                         <label className="text-sm-start float-start mb-1">Ảnh</label>
                         <div className="input-group">
-                            <input type="text" className="w-100 px-3 py-1" name="image" readOnly/>
+                            <input type="text" className="w-100 px-3 py-1 form-control" name="image" readOnly/>
                         </div>
                     </div>
                   </div>

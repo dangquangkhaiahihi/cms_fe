@@ -29,7 +29,7 @@ export default function EditArea() {
                 if(body.data){
                     setEditRequest(body.data);
                 }else{
-                    router.push("/system/area");
+                    moveToOtherPage("/system/area");
                 }
             });
         }
@@ -37,14 +37,14 @@ export default function EditArea() {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/system/area");
+        moveToOtherPage("/system/area");
     }
 
     //call api to resolve
     const handleProceedUpdate = async (request,id) => {
         const data = await editArea(request,id);
         console.log(data);
-        if(data.desc === 'SVC-SUCCESS-00') router.push("/system/area");
+        if(data.desc === 'SVC-SUCCESS-00') moveToOtherPage("/system/area");
         else{
             setError(data.result.message);
             setIsShowError(true);
@@ -63,6 +63,12 @@ export default function EditArea() {
         console.log(editRequest);
         setEditRequest({ ...editRequest, [e.target.name]: e.target.value });
     };
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
 
     return (
         <>
@@ -100,13 +106,13 @@ export default function EditArea() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Mã khu vực</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={code} name="code" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={code} name="code" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Tên khu vực</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={name} name="name" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={name} name="name" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                             </div>

@@ -46,7 +46,7 @@ const AreaPage = () => {
     const [account, setAccount] = useState('');
     useEffect(() => {
         if(account && account.area.length === 1){
-            router.push("/dashboard")
+            moveToOtherPage("/dashboard")
         }
     }, [account]); 
 
@@ -140,6 +140,12 @@ const AreaPage = () => {
         getList(currentPage, numPerPage);
     }
 
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
+
   return (
 
         <div className="d-flex flex-column-fluid">
@@ -210,7 +216,7 @@ const AreaPage = () => {
                                                 <div className="row row-16 justify-content-md-end align-items-center flex-grow-1">
                                                     <div className="col-auto">
                                                         <button className="btn btn-primary"
-                                                        onClick={() => {router.push("/system/area/add")}}>
+                                                        onClick={() => {moveToOtherPage("/system/area/add")}}>
                                                             Thêm mới
                                                         </button>
                                                     </div>
@@ -266,10 +272,10 @@ const AreaPage = () => {
                                                                     </td>
                                                                     <td className="sticky-ult">
                                                                             <div className="text-center">
-                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/system/area/detail/${item.id}`)}} data-tooltip="tooltip" title="Xem">
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {moveToOtherPage(`/system/area/detail/${item.id}`)}} data-tooltip="tooltip" title="Xem">
                                                                                     <Image src="/media/icons-color/subdefault/default/info.svg" alt="" styleClass={"btn-icon"} />
                                                                                 </button>
-                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {router.push(`/system/area/edit/${item.id}`)}} data-tooltip="tooltip" title="Chỉnh sửa">
+                                                                                <button className="btn btn-transaprent btn-icon btn-sm" onClick={() => {moveToOtherPage(`/system/area/edit/${item.id}`)}} data-tooltip="tooltip" title="Chỉnh sửa">
                                                                                     <Image src="/media/icons-color/subdefault/default/24x24-edit.svg" alt="" styleClass={"btn-icon"} />
                                                                                 </button>
                                                                                 {

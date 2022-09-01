@@ -69,7 +69,7 @@ export default function AddBusinessPremises() {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/business_premises");
+        moveToOtherPage("/business_premises");
     }
 
     //call api to resolve
@@ -79,7 +79,7 @@ export default function AddBusinessPremises() {
         }
         const data = await createBusinessPremises(request);
         console.log(data);
-        if(data.desc === 'SVC-SUCCESS-00') router.push("/business_premises");
+        if(data.desc === 'SVC-SUCCESS-00') moveToOtherPage("/business_premises");
         else{
             setError(data.result.message);
             setIsShowError(true);
@@ -100,6 +100,11 @@ export default function AddBusinessPremises() {
             addRequest.areaCode = e.target.value;
         }
         setAddRequest({ ...addRequest, [e.target.name]: e.target.value });
+    };
+
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
     };
 
     return (
@@ -137,19 +142,19 @@ export default function AddBusinessPremises() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Tên cơ sở</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={name} name="name" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={name} name="name" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Địa chỉ</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={addressGeneral} name="addressGeneral" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={addressGeneral} name="addressGeneral" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Địa chỉ chi tiết</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={addressDetail} name="addressDetail" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={addressDetail} name="addressDetail" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">

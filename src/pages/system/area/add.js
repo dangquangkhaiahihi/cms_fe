@@ -23,14 +23,14 @@ export default function AddArea() {
 
     const handleBackToList = () => {
         console.log("Close");
-        router.push("/system/area");
+        moveToOtherPage("/system/area");
     }
 
     //call api to resolve
     const handleProceedAdd = async (request) => {
         const data = await createArea(request);
         console.log(data);
-        if(data.desc === 'SVC-SUCCESS-00') router.push("/system/area");
+        if(data.desc === 'SVC-SUCCESS-00') moveToOtherPage("/system/area");
         else{
             setError(data.result.message);
             setIsShowError(true);
@@ -47,6 +47,12 @@ export default function AddArea() {
         setAddRequest({ ...addRequest, [e.target.name]: e.target.value });
     };
 
+    const moveToOtherPage = (path) => {
+        router.push(path);
+        window["destroySelectpicker"]();
+    };
+
+    
     return (
         <>
         {
@@ -82,13 +88,13 @@ export default function AddArea() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Mã khu vực</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={code} name="code" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={code} name="code" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Tên khu vực</label>
                                     <div className="input-group">
-                                        <input type="text" className="w-100 px-3 py-1" value={name} name="name" onChange={(e) => onChange(e)}/>
+                                        <input type="text" className="w-100 px-3 py-1 form-control" value={name} name="name" onChange={(e) => onChange(e)}/>
                                     </div>
                                 </div>
                             </div>
