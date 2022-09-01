@@ -6,6 +6,10 @@ import {logout} from "../../../api/userAPI/userApi";
 import Logo from "../../../../public/logo.svg";
 
 export default function KtHeader() {
+  const classNameStandard = "menu-item menu-item-rel";
+  const classNameActive = classNameStandard + " menu-item-active";
+  const classNameSubmenu = classNameStandard + " menu-item-submenu";
+
   const router = useRouter();
   const [account, setAccount] = useState('');
 
@@ -25,6 +29,10 @@ export default function KtHeader() {
     router.push(path);
     window["destroySelectpicker"]();
   };
+
+  const checkPathInclude = (path) => {
+    return router.asPath.includes(path);
+  }
 
   return (
 
@@ -93,7 +101,7 @@ export default function KtHeader() {
 
                 <ul className="menu-nav flex-grow-1 list-mb12 list-crop">
 
-                  <li className="menu-item menu-item-rel" aria-haspopup="true">
+                  <li className={checkPathInclude('/dashboard') ? classNameActive : classNameStandard}>
                     <Link href='/dashboard'>
                       <a className="menu-link">
                         <i className="menu-icon ri-home-3-line"></i>
@@ -103,7 +111,7 @@ export default function KtHeader() {
                   </li>
                   {
                     account && account.area.length > 1 && 
-                    <li className="menu-item menu-item-submenu menu-item-rel" aria-haspopup="true"
+                    <li className={checkPathInclude('/system') ? classNameSubmenu + ' ' + classNameActive : classNameSubmenu}
                       data-menu-toggle="hover">
                     <a href="javascript:;" className="menu-link menu-toggle">
                       <i className="menu-icon ri-folder-chart-line"></i>
@@ -111,7 +119,7 @@ export default function KtHeader() {
                     </a>
                     <div className="menu-submenu menu-submenu-classic menu-submenu-left">
                       <ul className="menu-subnav">
-                        <li className="menu-item" aria-haspopup="true">
+                        <li className={checkPathInclude('/area') ? "menu-item menu-item-active" : "menu-item"}>
 
                           <Link href='/system/area'>
                             <a className="menu-link">
@@ -121,7 +129,7 @@ export default function KtHeader() {
 
                         </li>
 
-                        <li className="menu-item" aria-haspopup="true">
+                        <li className={checkPathInclude('/business_type') ? "menu-item menu-item-active" : "menu-item"}>
 
                           <Link href='/system/business_type'>
                             <a className="menu-link">
@@ -135,7 +143,7 @@ export default function KtHeader() {
                   }
                   {
                     account && account.area.length > 1 && 
-                    <li className="menu-item menu-item-rel" aria-haspopup="true">
+                    <li className={checkPathInclude('/user') ? classNameActive : classNameStandard}>
                       <Link href='/user'>
                         <a className="menu-link">
                           <i className="menu-icon ri-home-3-line"></i>
@@ -144,7 +152,7 @@ export default function KtHeader() {
                       </Link>
                     </li>
                   }
-                  <li className="menu-item menu-item-rel" aria-haspopup="true">
+                  <li className={checkPathInclude('/business_premises') ? classNameActive : classNameStandard}>
                     <Link href='/business_premises'>
                       <a className="menu-link">
                         <i className="menu-icon ri-home-3-line"></i>
