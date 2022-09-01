@@ -177,15 +177,17 @@ const AreaPage = () => {
                         <div className="card card-border card-custom gutter-b example example-compact">
                             {/* form search */}
                             <div className="card-header">
-                                <div className="row align-items-center flex-grow-1 list-mb16 list-crop">
+                                <div className="row align-items-center flex-grow-1 list-mb16 list-crop my-4">
                                     <div className="col-md-3">
+                                        <label>Từ khóa</label>
                                         <div className="form-group">
                                             <input type="text" className="form-control input-search" onChange={(e) => onChange(e)}
                                                 value={keyword} name="keyword" placeholder="Tìm kiếm"  />
                                         </div>
                                     </div>
                                     <div className="col-md-3">
-                                        <div className="">
+                                        <label>Trạng thái</label>
+                                        <div className="form-group">
                                             <SelectForm
                                                 styleClass="form-control selectpicker mb-3"
                                                 title="Trạng thái hoạt động"
@@ -197,7 +199,7 @@ const AreaPage = () => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="row justify-content-center">
+                                    <div className="row justify-content-center" style={{ marginTop: '20px' }}>
                                         <div className="col-auto">
                                             <button className="btn btn-primary w-20" onClick={(e) => onSubmit(e)}>
                                                 Tìm kiếm

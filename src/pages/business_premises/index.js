@@ -223,7 +223,7 @@ const BusinessPremisesPage = () => {
                             <div className="card-header">
                                 <div className="row align-items-center flex-grow-1 list-mb16 list-crop my-4">
                                     <div className="col-md-3">
-                                        <label>Tìm kiếm</label>
+                                        <label>Từ khóa</label>
                                         <div className="form-group">
                                             <input type="text" className="form-control input-search" onChange={(e) => onChange(e)}
                                                 value={keyword} name="keyword" placeholder="Tìm kiếm"  />
@@ -233,7 +233,7 @@ const BusinessPremisesPage = () => {
                                         JSON.parse(localStorage.getItem("account")).area.length > 1 &&
                                         <div className="col-md-3">
                                             <label>Khu vực</label>
-                                            <div className="">
+                                            <div className="form-group">
                                                 <SelectForm
                                                     styleClass="form-control selectpicker mb-3"
                                                     title="Khu vực"
@@ -249,7 +249,7 @@ const BusinessPremisesPage = () => {
                                     }
                                     <div className="col-md-3">
                                         <label>Loại hình kinh doanh</label>
-                                        <div className="">
+                                        <div className="form-group">
                                             <SelectForm
                                                 styleClass="form-control selectpicker mb-3"
                                                 title="Loại hình kinh doanh"
@@ -263,7 +263,7 @@ const BusinessPremisesPage = () => {
                                     </div>
                                     <div className="col-md-3">
                                         <label>Nơi cấp chứng nhận</label>
-                                        <div className="">
+                                        <div className="form-group">
                                             <SelectForm
                                                 styleClass="form-control selectpicker mb-3"
                                                 title="Nơi cấp chứng nhận"
@@ -277,7 +277,7 @@ const BusinessPremisesPage = () => {
                                     </div>
                                     <div className="col-md-3">
                                         <label>Trạng thái ĐKKD</label>
-                                        <div className="">
+                                        <div className="form-group">
                                             <SelectForm
                                             styleClass="form-control selectpicker mb-3"
                                             title="Trạng thái ĐKKD"
@@ -291,7 +291,7 @@ const BusinessPremisesPage = () => {
                                     </div>
                                     <div className="col-md-3">
                                         <label>Trạng thái chứng nhận ATTP</label>
-                                        <div className="">
+                                        <div className="form-group">
                                             <SelectForm
                                                 styleClass="form-control selectpicker mb-3"
                                                 title="Trạng thái chứng nhận ATTP"
@@ -305,7 +305,7 @@ const BusinessPremisesPage = () => {
                                     </div>
                                     <div className="col-md-3">
                                         <label>Trạng thái cảnh báo</label>
-                                        <div className="">
+                                        <div className="form-group">
                                             <SelectForm
                                                 styleClass="form-control selectpicker mb-3"
                                                 title="Trạng thái cảnh báo"

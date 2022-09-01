@@ -211,16 +211,18 @@ const UserPage = () => {
                     <div className="col-md-12">
                         <div className="card card-border card-custom gutter-b example example-compact">
                             {/* form search */}
-                            <div className="card-header">
+                            <div className="card-header" style={{ alignItems: 'center' }}>
                                 <div className="row align-items-center flex-grow-1 list-mb16 list-crop my-4">
                                     <div className="col-md-3">
+                                        <label>Từ khóa</label>
                                         <div className="form-group">
                                             <input type="text" className="form-control input-search" onChange={(e) => onChange(e)}
                                                 value={keyword} name="keyword" placeholder="Tìm kiếm"  />
                                         </div>
                                     </div>
                                     <div className="col-md-3">
-                                        <div className="">
+                                        <label>Trạng thái</label>
+                                        <div className="form-group">
                                             <SelectForm
                                                 styleClass="form-control selectpicker mb-3"
                                                 title="Trạng thái hoạt động"
@@ -233,7 +235,8 @@ const UserPage = () => {
                                         </div>
                                     </div>
                                     <div className="col-md-3">
-                                        <div className="">
+                                        <label>Quyền</label>
+                                        <div className="form-group">
                                             <SelectForm
                                                 styleClass="form-control selectpicker mb-3"
                                                 title="Quyền"
@@ -246,7 +249,8 @@ const UserPage = () => {
                                         </div>
                                     </div>
                                     <div className="col-md-3">
-                                        <div className="">
+                                        <label>Khu vực</label>
+                                        <div className="form-group">
                                             <SelectForm
                                                 styleClass="form-control selectpicker mb-3"
                                                 title="Khu vực"
@@ -259,12 +263,12 @@ const UserPage = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row align-items-center list-mb16 list-crop mx-2 my-4">
-                                    <div className="col-auto">
+                                <div style={{ marginLeft: '30px' ,marginTop: '5px' }}>
+                                    {/* <div className="col-auto"> */}
                                         <button className="btn btn-primary w-20" onClick={(e) => onSubmit(e)}>
                                             Tìm kiếm
                                         </button>
-                                    </div>
+                                    {/* </div> */}
                                 </div>
                             </div>
                             {/* End form search */}
