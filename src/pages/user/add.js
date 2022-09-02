@@ -17,9 +17,8 @@ export default function AddUser() {
             name : "Quyền Người Dùng"
         }
     ]);
-    console.log("sdad", areaCodeOptions);
 
-    const [editRequest, setEditRequest] = useState({
+    const [addRequest, setAddRequest] = useState({
         email : "",
         firstName : "",
         lastName : "",
@@ -28,9 +27,10 @@ export default function AddUser() {
         socialSecurityNum : "",
         areas: [],
         areaCode : "",
-        role : ""
+        role : "",
     });
-    const { email, firstName, lastName, phoneNumber, dob, socialSecurityNum, areaCode, role } = editRequest;
+    const { email, firstName, lastName, phoneNumber, dob, socialSecurityNum, areaCode, role } = addRequest;
+    const [photo, setPhoto] = useState({});
 
     const [error, setError] = useState("");
     const [isShowError, setIsShowError] = useState(false);
@@ -61,6 +61,7 @@ export default function AddUser() {
         setAreaCodeOptions(dummyAreaOptions);
     }
 
+
     const handleBackToList = () => {
         console.log("Close");
         moveToOtherPage("/user");
@@ -68,7 +69,7 @@ export default function AddUser() {
 
     //call api to resolve
     const handleProceedAdd = async (request) => {
-        const data = await addUser(request);
+        const data = await addUser(request,photo);
         console.log(data);
         if(data.desc === 'SVC-SUCCESS-00'){
             moveToOtherPage("/user");
@@ -86,7 +87,7 @@ export default function AddUser() {
 
     const onChange = (e) => {   
         e.preventDefault();
-        setEditRequest({ ...editRequest, [e.target.name]: e.target.value });
+        setAddRequest({ ...addRequest, [e.target.name]: e.target.value });
     };
 
     const moveToOtherPage = (path) => {
@@ -94,11 +95,16 @@ export default function AddUser() {
         window["destroySelectpicker"]();
     };
 
+    //Chọn file
+    function onchangeFile(e){
+        if(!e.target.files) return;
+        setPhoto(e.target.files[0]);
+    }
 
     return (
         <>
         {
-            editRequest && 
+            addRequest && 
             <div className="d-flex flex-column-fluid">
                 <div className="container">
                     <ul className="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 h5">
@@ -177,7 +183,7 @@ export default function AddUser() {
                                 <div className="col-md-6 col-xl-6 mb-3">
                                     <label className="text-sm-start float-start mb-1">Khu vực quản lý</label>
                                     {
-                                        (editRequest.role) === "USER" &&
+                                        (addRequest.role) === "USER" &&
                                         <div className="input-group">
                                             <select className="w-100 px-3 py-1 form-control selectpicker" title="-Chọn khu vực-" value={areaCode} name="areaCode" onChange={(e) => onChange(e)} >
                                                 {areaCodeOptions.map((item) => (
@@ -187,17 +193,23 @@ export default function AddUser() {
                                         </div>
                                     }
                                     {
-                                        (editRequest.role) === "ADMIN" &&
+                                        (addRequest.role) === "ADMIN" &&
                                         <div className="input-group">
                                             <input type="text" className="w-100 px-3 py-1 form-control" value={"Tất cả các khu vực"} readOnly />
                                         </div>
                                     }
                                     {
-                                        (editRequest.role) === "" &&
+                                        (addRequest.role) === "" &&
                                         <div className="input-group">
                                             <input type="text" className="w-100 px-3 py-1 form-control" value={"Vui lòng chọn Quyền người dùng trước"} readOnly />
                                         </div>
                                     }
+                                </div>
+                                <div className="col-md-6 col-xl-6 mb-3">
+                                    <label className="text-sm-start float-start mb-1">Ảnh</label>
+                                    <div className="input-group">
+                                        <input type='file' className='' onChange={onchangeFile} required></input>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -208,8 +220,8 @@ export default function AddUser() {
                                 </button>
                             </div>
                             <div className="col-auto block-right">
-                                <button className="btn btn-primary" onClick={() => handleProceedAdd(editRequest)}>
-                                    Thay đổi
+                                <button className="btn btn-primary" onClick={() => handleProceedAdd(addRequest)}>
+                                    Lưu
                                 </button>
                             </div>
                         </div>

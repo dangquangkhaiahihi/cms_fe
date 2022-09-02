@@ -2,6 +2,7 @@ import React, { useState, useEffect }  from "react";
 import { useRouter } from "next/dist/client/router";
 import { getUserDetail } from "../../../api/userAPI/userApi";
 import LayoutPortal from "../../../components/layout/LayoutPortal";
+import { Image } from "react-bootstrap";
 
 export default function DetailUser() {
     const router = useRouter();
@@ -39,6 +40,7 @@ export default function DetailUser() {
         window["destroySelectpicker"]();
     };
 
+    console.log("vvvvvvvvvvvvvvvvvvvvvvv",userDetail);
 
     return (
         <>
@@ -122,6 +124,13 @@ export default function DetailUser() {
                                     <label className="text-sm-start float-start mb-1">Quyền người dùng</label>
                                     <div className="input-group">
                                         <input type="text" className="w-100 px-3 py-1 form-control" value={userDetail.role} readOnly />
+                                    </div>
+                                </div>
+                                {/* <img th:src="/@{${user.photosImagePath}}" /> */}
+                                <div className="col-md-6 col-xl-6 mb-3">
+                                    <label className="text-sm-start float-start mb-1">Quyền người dùng</label>
+                                    <div className="input-group">
+                                        <Image src={"C:/Users/khaidq/Documents/GitHub/cms/cms" + userDetail.photo} alt=''/>
                                     </div>
                                 </div>
                             </div>

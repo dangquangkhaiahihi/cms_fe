@@ -73,11 +73,26 @@ export function editUser(request,id) {
     });
 }
 
-export function addUser(request) {
+export function addUser(request,file) {
+    const formData = new FormData();
+    console.log('api,file',file);
+    if(file){
+        formData.append("photo", file);
+    }
+    formData.append("email", request.email);
+    formData.append("firstName", request.firstName);
+    formData.append("lastName", request.lastName);
+    formData.append("phoneNumber", request.phoneNumber);
+    formData.append("dob", request.dob);
+    formData.append("socialSecurityNum", request.socialSecurityNum);
+    formData.append("areas", request.areas);
+    formData.append("areaCode", request.areaCode);
+    formData.append("role", request.role);
+
     const endPoint = `/users`;
     const options = {
         method: 'POST',
-        data: JSON.stringify(request)
+        data:formData
     };
     return callApi(endPoint, options).then(body => {
         return body;
